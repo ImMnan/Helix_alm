@@ -1,0 +1,57 @@
+#!/bin/bash
+
+echo "This is a Helix ALM auto starter program!"
+
+sudo /usr/bin/spls start
+
+sudo /usr/bin/ttstudio start
+
+cat << EOF
+[1] HELIX LICESE SERVER - ADMIN UTILITIES
+[2] HELIX ALM SERVER - ADMIN UTILITIES
+[3] RUN HELIX ALM CLIENT
+[4] RESTART THE SERVERS
+[5] STOP ALL SERVICES
+[6] HELP FOR ALM
+
+Enter your choice. In case you have multiple choices,
+enter the relevent numbers in sequence, no commas required.
+
+EOF
+
+while true
+do
+	echo "Press ctrl + C to close! or enter the option from above"
+	read choice
+	if [[ $choice == "1" ]]; then
+		sudo /usr/bin/lsadmin
+
+	elif [[ $choice == "2" ]]; then
+		sudo /usr/bin/ttadmin
+
+        elif [[ $choice == "3" ]]; then
+                sudo /usr/bin/ttclient
+
+        elif [[ $choice == "12" ]]; then
+                sudo /usr/bin/lsadmin & sudo /usr/bin/ttadmin
+
+        elif [[ $choice == "23" ]]; then
+                sudo /usr/bin/ttadmin &  sudo /usr/bin/ttclient
+
+        elif [[ $choice == "123" ]]; then
+                sudo /usr/bin/lsadmin &	sudo /usr/bin/ttadmin & sudo /usr/bin/ttclient
+
+	elif [[ $choice == "4" ]]; then
+		sudo sudo /usr/bin/spls restart & sudo /usr/bin/ttstudio restart
+
+        elif [[ $choice == "5" ]]; then
+                sudo sudo /usr/bin/spls stop & sudo /usr/bin/ttstudio stop
+
+	elif [[ $choice == "6" ]]; then
+		brave-browser https://help.perforce.com/helix-alm/helixalm/
+
+	else
+		echo "Enter a valid input!"
+	fi
+
+done
